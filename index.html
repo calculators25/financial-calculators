@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free mortgage calculator - Calculate monthly payments, total interest, and amortization schedule for your home loan.">
-    <title>Mortgage Calculator 2025 - Free Home Loan Calculator</title>
+    <meta name="description" content="Free financial calculators - Mortgage, loan payoff, retirement, investment, and budgeting calculators to help you make smart money decisions.">
+    <title>Free Financial Calculators 2025 - Money Management Tools</title>
     <style>
         * {
             margin: 0;
@@ -20,195 +20,193 @@
         }
         
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
         }
         
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px 30px;
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
             text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
         
         h1 {
-            font-size: 2.5em;
+            font-size: 3em;
+            color: #333;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tagline {
+            font-size: 1.3em;
+            color: #666;
             margin-bottom: 10px;
         }
         
         .subtitle {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-        
-        .content {
-            padding: 40px 30px;
-        }
-        
-        .input-group {
-            margin-bottom: 25px;
-        }
-        
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #333;
             font-size: 1em;
-        }
-        
-        input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1.1em;
-            transition: border-color 0.3s;
-        }
-        
-        input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
-        .btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.2em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
-        }
-        
-        .btn:active {
-            transform: translateY(0);
-        }
-        
-        .results {
-            margin-top: 40px;
-            padding: 30px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            display: none;
-        }
-        
-        .results.show {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .result-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px 0;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        
-        .result-item:last-child {
-            border-bottom: none;
-        }
-        
-        .result-label {
-            font-weight: 600;
-            color: #555;
-        }
-        
-        .result-value {
-            font-size: 1.3em;
-            font-weight: 700;
-            color: #667eea;
-        }
-        
-        .amortization {
-            margin-top: 30px;
-        }
-        
-        .amortization h3 {
-            margin-bottom: 20px;
-            color: #333;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        th {
-            background: #667eea;
-            color: white;
-            padding: 12px;
-            text-align: left;
-            font-weight: 600;
-        }
-        
-        td {
-            padding: 12px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        
-        tr:last-child td {
-            border-bottom: none;
-        }
-        
-        tr:hover {
-            background: #f8f9fa;
+            color: #999;
         }
         
         .ad-placeholder {
-            margin: 30px 0;
-            padding: 20px;
-            background: #fff3cd;
-            border: 2px dashed #ffc107;
-            border-radius: 10px;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
             text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 2px dashed #ffc107;
             color: #856404;
-            font-size: 0.9em;
+        }
+        
+        .calculators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .calc-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .calc-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+        
+        .calc-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .calc-card h2 {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .calc-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .calc-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        
+        .coming-soon {
+            opacity: 0.6;
+            position: relative;
+        }
+        
+        .coming-soon::after {
+            content: 'COMING SOON';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ffc107;
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.7em;
+            font-weight: 700;
+        }
+        
+        .coming-soon:hover {
+            transform: none;
+            cursor: default;
+        }
+        
+        .features {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature {
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .feature h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .feature p {
+            color: #666;
+            line-height: 1.6;
         }
         
         footer {
-            text-align: center;
+            background: white;
+            border-radius: 20px;
             padding: 30px;
-            background: #f8f9fa;
+            text-align: center;
             color: #666;
-            font-size: 0.9em;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
         
-        @media (max-width: 600px) {
+        footer p {
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
             h1 {
-                font-size: 1.8em;
+                font-size: 2em;
             }
             
-            .content {
-                padding: 20px;
+            .tagline {
+                font-size: 1.1em;
             }
             
-            table {
-                font-size: 0.85em;
+            header {
+                padding: 40px 20px;
             }
             
-            th, td {
-                padding: 8px;
+            .calculators-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -216,144 +214,115 @@
 <body>
     <div class="container">
         <header>
-            <h1>💰 Mortgage Calculator</h1>
-            <p class="subtitle">Calculate your monthly payments and total loan cost</p>
+            <h1>💰 Financial Calculators</h1>
+            <p class="tagline">Free tools to help you make smarter money decisions</p>
+            <p class="subtitle">No signup required • 100% free • Mobile friendly</p>
         </header>
         
-        <!-- AdSense Placeholder - Replace with your ad code -->
+        <!-- AdSense Placeholder -->
         <div class="ad-placeholder">
             📢 Google AdSense Ad Space - Add your ad code here after approval
         </div>
         
-        <div class="content">
-            <form id="mortgageForm">
-                <div class="input-group">
-                    <label for="homePrice">Home Price ($)</label>
-                    <input type="number" id="homePrice" placeholder="350000" required>
-                </div>
-                
-                <div class="input-group">
-                    <label for="downPayment">Down Payment ($)</label>
-                    <input type="number" id="downPayment" placeholder="70000" required>
-                </div>
-                
-                <div class="input-group">
-                    <label for="interestRate">Interest Rate (%)</label>
-                    <input type="number" id="interestRate" step="0.01" placeholder="6.5" required>
-                </div>
-                
-                <div class="input-group">
-                    <label for="loanTerm">Loan Term (Years)</label>
-                    <input type="number" id="loanTerm" placeholder="30" required>
-                </div>
-                
-                <button type="submit" class="btn">Calculate Payment</button>
-            </form>
+        <div class="calculators-grid">
+            <!-- Active Calculators -->
+            <a href="mortgage-calculator.html" class="calc-card">
+                <div class="calc-icon">🏠</div>
+                <h2>Mortgage Calculator</h2>
+                <p>Calculate monthly payments, total interest, and see your amortization schedule for home loans.</p>
+                <span class="calc-tag">LIVE</span>
+            </a>
             
-            <div id="results" class="results">
-                <div class="result-item">
-                    <span class="result-label">Monthly Payment</span>
-                    <span class="result-value" id="monthlyPayment">$0</span>
-                </div>
-                <div class="result-item">
-                    <span class="result-label">Total Loan Amount</span>
-                    <span class="result-value" id="loanAmount">$0</span>
-                </div>
-                <div class="result-item">
-                    <span class="result-label">Total Interest Paid</span>
-                    <span class="result-value" id="totalInterest">$0</span>
-                </div>
-                <div class="result-item">
-                    <span class="result-label">Total Amount Paid</span>
-                    <span class="result-value" id="totalPaid">$0</span>
+            <a href="loan-payoff-calculator.html" class="calc-card">
+                <div class="calc-icon">🚀</div>
+                <h2>Loan Payoff Calculator</h2>
+                <p>See how extra payments can save you thousands and help you become debt-free faster.</p>
+                <span class="calc-tag">LIVE</span>
+            </a>
+            
+            <!-- Coming Soon Calculators -->
+            <div class="calc-card coming-soon">
+                <div class="calc-icon">💳</div>
+                <h2>Credit Card Payoff</h2>
+                <p>Calculate how long it will take to pay off your credit card debt and compare different payment strategies.</p>
+                <span class="calc-tag">Popular</span>
+            </div>
+            
+            <div class="calc-card coming-soon">
+                <div class="calc-icon">🏦</div>
+                <h2>401(k) Calculator</h2>
+                <p>Project your retirement savings and see how much you need to save for a comfortable retirement.</p>
+                <span class="calc-tag">High Value</span>
+            </div>
+            
+            <div class="calc-card coming-soon">
+                <div class="calc-icon">📈</div>
+                <h2>Compound Interest</h2>
+                <p>See how your investments grow over time with the power of compound interest.</p>
+                <span class="calc-tag">Essential</span>
+            </div>
+            
+            <div class="calc-card coming-soon">
+                <div class="calc-icon">🚗</div>
+                <h2>Auto Loan Calculator</h2>
+                <p>Calculate car payments, compare loan terms, and find the best auto financing option.</p>
+                <span class="calc-tag">Popular</span>
+            </div>
+            
+            <div class="calc-card coming-soon">
+                <div class="calc-icon">💼</div>
+                <h2>Freelance Rate Calculator</h2>
+                <p>Determine your hourly or project rate based on your desired income and expenses.</p>
+                <span class="calc-tag">Business</span>
+            </div>
+            
+            <div class="calc-card coming-soon">
+                <div class="calc-icon">🎯</div>
+                <h2>Budget Calculator</h2>
+                <p>Create a balanced budget using the 50/30/20 rule and track your monthly expenses.</p>
+                <span class="calc-tag">Essential</span>
+            </div>
+        </div>
+        
+        <div class="features">
+            <h2>Why Use Our Calculators?</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Results</h3>
+                    <p>Get accurate calculations in seconds without any complicated forms or signup requirements.</p>
                 </div>
                 
-                <!-- AdSense Placeholder -->
-                <div class="ad-placeholder" style="margin-top: 30px;">
-                    📢 Google AdSense Ad Space - Add your ad code here after approval
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <h3>100% Private</h3>
+                    <p>All calculations happen in your browser. We never store or share your financial information.</p>
                 </div>
                 
-                <div class="amortization">
-                    <h3>First Year Amortization Schedule</h3>
-                    <table id="amortizationTable">
-                        <thead>
-                            <tr>
-                                <th>Month</th>
-                                <th>Principal</th>
-                                <th>Interest</th>
-                                <th>Balance</th>
-                            </tr>
-                        </thead>
-                        <tbody id="amortizationBody">
-                        </tbody>
-                    </table>
+                <div class="feature">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Use our calculators on any device - desktop, tablet, or smartphone.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">💯</div>
+                    <h3>Always Free</h3>
+                    <p>No hidden fees, no premium features, no credit card required. Just helpful financial tools.</p>
                 </div>
             </div>
         </div>
         
+        <!-- AdSense Placeholder -->
+        <div class="ad-placeholder">
+            📢 Google AdSense Ad Space - Add your ad code here after approval
+        </div>
+        
         <footer>
-            <p>© 2025 Financial Calculators | Free mortgage calculator tool for homebuyers</p>
-            <p>Disclaimer: Results are estimates. Consult a financial advisor for personalized advice.</p>
+            <p><strong>© 2025 Financial Calculators</strong></p>
+            <p>Free financial planning tools and calculators for better money management</p>
+            <p style="margin-top: 15px; font-size: 0.9em;">Disclaimer: These calculators provide estimates for educational purposes. Consult a financial advisor for personalized advice.</p>
         </footer>
     </div>
-    
-    <script>
-        document.getElementById('mortgageForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get input values
-            const homePrice = parseFloat(document.getElementById('homePrice').value);
-            const downPayment = parseFloat(document.getElementById('downPayment').value);
-            const interestRate = parseFloat(document.getElementById('interestRate').value);
-            const loanTerm = parseFloat(document.getElementById('loanTerm').value);
-            
-            // Calculate loan amount
-            const loanAmount = homePrice - downPayment;
-            
-            // Convert annual interest rate to monthly and decimal
-            const monthlyRate = (interestRate / 100) / 12;
-            const numPayments = loanTerm * 12;
-            
-            // Calculate monthly payment using formula: M = P[r(1+r)^n]/[(1+r)^n-1]
-            const monthlyPayment = loanAmount * 
-                (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / 
-                (Math.pow(1 + monthlyRate, numPayments) - 1);
-            
-            // Calculate totals
-            const totalPaid = monthlyPayment * numPayments;
-            const totalInterest = totalPaid - loanAmount;
-            
-            // Display results
-            document.getElementById('monthlyPayment').textContent = '$' + monthlyPayment.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-            document.getElementById('loanAmount').textContent = '$' + loanAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-            document.getElementById('totalInterest').textContent = '$' + totalInterest.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-            document.getElementById('totalPaid').textContent = '$' + totalPaid.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-            
-            // Generate amortization schedule (first 12 months)
-            let balance = loanAmount;
-            const tbody = document.getElementById('amortizationBody');
-            tbody.innerHTML = '';
-            
-            for (let month = 1; month <= 12; month++) {
-                const interestPayment = balance * monthlyRate;
-                const principalPayment = monthlyPayment - interestPayment;
-                balance -= principalPayment;
-                
-                const row = tbody.insertRow();
-                row.innerHTML = `
-                    <td>${month}</td>
-                    <td>$${principalPayment.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
-                    <td>$${interestPayment.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
-                    <td>$${balance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
-                `;
-            }
-            
-            // Show results
-            document.getElementById('results').classList.add('show');
-            
-            // Smooth scroll to results
-            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        });
-    </script>
 </body>
 </html>
