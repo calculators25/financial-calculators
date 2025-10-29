@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free 401(k) calculator - Project your retirement savings with employer match and see if you're on track for retirement.">
+    <title>401(k) Retirement Calculator 2025 - Plan Your Future</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .nav {
+            background: #2d3748;
+            padding: 15px 30px;
+            text-align: center;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95em;
+        }
+        
+        .nav a:hover {
+            color: #4facfe;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 1em;
+        }
+        
+        .help-text {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1.1em;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #4facfe;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .results {
+            margin-top: 40px;
+            display: none;
+        }
+        
+        .results.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-stat {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .hero-stat h2 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .hero-stat p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .stat-card h3 {
+            color: #4facfe;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card p {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .breakdown {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .breakdown h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .breakdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .breakdown-label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .breakdown-value {
+            font-weight: 700;
+            color: #4facfe;
+            font-size: 1.2em;
+        }
+        
+        .chart-placeholder {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .year-projection {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+        
+        .year-label {
+            width: 80px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .projection-bar {
+            flex: 1;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .projection-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        .ad-placeholder {
+            margin: 30px 0;
+            padding: 20px;
+            background: #fff3cd;
+            border: 2px dashed #ffc107;
+            border-radius: 10px;
+            text-align: center;
+            color: #856404;
+            font-size: 0.9em;
+        }
+        
+        .alert {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .alert.success {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+        
+        .alert.warning {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+        
+        .alert h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .alert p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .nav {
+                font-size: 0.85em;
+            }
+            
+            .nav a {
+                margin: 0 6px;
+                display: inline-block;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏦 401(k) Retirement Calculator</h1>
+            <p class="subtitle">Plan your retirement and maximize your savings</p>
+        </header>
+        
+        <div class="nav">
+            <a href="index.html">🏠 Home</a>
+            <a href="mortgage-calculator.html">Mortgage</a>
+            <a href="loan-payoff-calculator.html">Loan Payoff</a>
+            <a href="credit-card-payoff-calculator.html">Credit Card</a>
+            <a href="401k-calculator.html">401(k)</a>
+        </div>
+        
+        <!-- AdSense Placeholder -->
+        <div class="ad-placeholder">
+            📢 Google AdSense Ad Space - Add your ad code here after approval
+        </div>
+        
+        <div class="content">
+            <form id="retirementForm">
+                <div class="two-column">
+                    <div class="input-group">
+                        <label for="currentAge">Your Current Age</label>
+                        <input type="number" id="currentAge" placeholder="30" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="retirementAge">Retirement Age</label>
+                        <input type="number" id="retirementAge" placeholder="65" required>
+                    </div>
+                </div>
+                
+                <div class="two-column">
+                    <div class="input-group">
+                        <label for="currentBalance">Current 401(k) Balance ($)</label>
+                        <input type="number" id="currentBalance" placeholder="50000" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="annualSalary">Annual Salary ($)</label>
+                        <input type="number" id="annualSalary" placeholder="75000" required>
+                    </div>
+                </div>
+                
+                <div class="two-column">
+                    <div class="input-group">
+                        <label for="contribution">Your Contribution (%)</label>
+                        <input type="number" id="contribution" step="0.5" placeholder="6" required>
+                        <div class="help-text">Percentage of salary you contribute</div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="employerMatch">Employer Match (%)</label>
+                        <input type="number" id="employerMatch" step="0.5" placeholder="3" required>
+                        <div class="help-text">Common: 50% match up to 6%</div>
+                    </div>
+                </div>
+                
+                <div class="two-column">
+                    <div class="input-group">
+                        <label for="returnRate">Expected Annual Return (%)</label>
+                        <input type="number" id="returnRate" step="0.1" placeholder="7" required>
+                        <div class="help-text">Historical average: 7-10%</div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="salaryIncrease">Annual Salary Increase (%)</label>
+                        <input type="number" id="salaryIncrease" step="0.1" placeholder="3" required>
+                        <div class="help-text">Cost of living + raises</div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn">Calculate Retirement Savings</button>
+            </form>
+            
+            <div id="results" class="results">
+                <div class="hero-stat">
+                    <h2 id="finalBalance">$0</h2>
+                    <p>Your Projected 401(k) Balance at Retirement</p>
+                </div>
+                
+                <div id="alert" class="alert"></div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3 id="totalContributions">$0</h3>
+                        <p>Your Total Contributions</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3 id="employerContributions">$0</h3>
+                        <p>Employer Contributions</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3 id="investmentGains">$0</h3>
+                        <p>Investment Gains</p>
+                    </div>
+                </div>
+                
+                <div class="breakdown">
+                    <h3>Annual Breakdown</h3>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Your Annual Contribution</span>
+                        <span class="breakdown-value" id="annualContribution">$0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Employer Annual Match</span>
+                        <span class="breakdown-value" id="annualEmployer">$0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Total Annual Savings</span>
+                        <span class="breakdown-value" id="annualTotal">$0</span>
+                    </div>
+                </div>
+                
+                <!-- AdSense Placeholder -->
+                <div class="ad-placeholder">
+                    📢 Google AdSense Ad Space - Add your ad code here after approval
+                </div>
+                
+                <div class="chart-placeholder">
+                    <h3 style="margin-bottom: 20px; color: #333;">Growth Over Time</h3>
+                    <div id="projectionBars"></div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 Financial Calculators | Free 401(k) and retirement planning tools</p>
+            <p>Disclaimer: Projections are estimates based on assumptions. Past performance doesn't guarantee future results. Consult a financial advisor.</p>
+        </footer>
+    </div>
+    
+    <script>
+        function formatCurrency(amount) {
+            if (amount >= 1000000) {
+                return '$' + (amount / 1000000).toFixed(2) + 'M';
+            }
+            return '$' + Math.round(amount).toLocaleString();
+        }
+        
+        document.getElementById('retirementForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const currentAge = parseInt(document.getElementById('currentAge').value);
+            const retirementAge = parseInt(document.getElementById('retirementAge').value);
+            const currentBalance = parseFloat(document.getElementById('currentBalance').value);
+            const annualSalary = parseFloat(document.getElementById('annualSalary').value);
+            const contributionRate = parseFloat(document.getElementById('contribution').value) / 100;
+            const employerMatchRate = parseFloat(document.getElementById('employerMatch').value) / 100;
+            const returnRate = parseFloat(document.getElementById('returnRate').value) / 100;
+            const salaryIncrease = parseFloat(document.getElementById('salaryIncrease').value) / 100;
+            
+            const yearsToRetirement = retirementAge - currentAge;
+            
+            if (yearsToRetirement <= 0) {
+                alert('Retirement age must be greater than current age');
+                return;
+            }
+            
+            let balance = currentBalance;
+            let totalEmployeeContributions = 0;
+            let totalEmployerContributions = 0;
+            let currentSalary = annualSalary;
+            
+            const projectionData = [];
+            
+            // Calculate year by year
+            for (let year = 0; year < yearsToRetirement; year++) {
+                const employeeContribution = currentSalary * contributionRate;
+                const employerContribution = currentSalary * employerMatchRate;
+                const totalAnnualContribution = employeeContribution + employerContribution;
+                
+                // Add contributions
+                balance += totalAnnualContribution;
+                
+                // Apply investment returns
+                balance *= (1 + returnRate);
+                
+                totalEmployeeContributions += employeeContribution;
+                totalEmployerContributions += employerContribution;
+                
+                // Increase salary for next year
+                currentSalary *= (1 + salaryIncrease);
+                
+                // Store every 5 years or final year
+                if (year % 5 === 0 || year === yearsToRetirement - 1) {
+                    projectionData.push({
+                        age: currentAge + year + 1,
+                        balance: balance
+                    });
+                }
+            }
+            
+            const investmentGains = balance - currentBalance - totalEmployeeContributions - totalEmployerContributions;
+            
+            // Display results
+            document.getElementById('finalBalance').textContent = formatCurrency(balance);
+            document.getElementById('totalContributions').textContent = formatCurrency(totalEmployeeContributions);
+            document.getElementById('employerContributions').textContent = formatCurrency(totalEmployerContributions);
+            document.getElementById('investmentGains').textContent = formatCurrency(investmentGains);
+            
+            // First year breakdown
+            const firstYearEmployee = annualSalary * contributionRate;
+            const firstYearEmployer = annualSalary * employerMatchRate;
+            document.getElementById('annualContribution').textContent = formatCurrency(firstYearEmployee);
+            document.getElementById('annualEmployer').textContent = formatCurrency(firstYearEmployer);
+            document.getElementById('annualTotal').textContent = formatCurrency(firstYearEmployee + firstYearEmployer);
+            
+            // Determine if on track
+            const alert = document.getElementById('alert');
+            const salaryMultiple = balance / annualSalary;
+            
+            if (salaryMultiple >= 10) {
+                alert.className = 'alert success';
+                alert.innerHTML = '<h4>🎉 Excellent! You\'re on track for a comfortable retirement</h4><p>Your projected balance is ' + salaryMultiple.toFixed(1) + 'x your current salary. Financial experts recommend having 10-12x your salary saved by retirement.</p>';
+            } else if (salaryMultiple >= 7) {
+                alert.className = 'alert';
+                alert.innerHTML = '<h4>👍 Good progress, but consider increasing contributions</h4><p>Your projected balance is ' + salaryMultiple.toFixed(1) + 'x your current salary. Try to reach 10x for a more comfortable retirement.</p>';
+            } else {
+                alert.className = 'alert warning';
+                alert.innerHTML = '<h4>⚠️ You may need to save more for retirement</h4><p>Your projected balance is only ' + salaryMultiple.toFixed(1) + 'x your current salary. Consider increasing your contribution rate or working a few more years.</p>';
+            }
+            
+            // Create projection bars
+            const maxBalance = Math.max(...projectionData.map(d => d.balance));
+            const barsHtml = projectionData.map(data => {
+                const percent = (data.balance / maxBalance) * 100;
+                return `
+                    <div class="year-projection">
+                        <div class="year-label">Age ${data.age}</div>
+                        <div class="projection-bar">
+                            <div class="projection-fill" style="width: ${percent}%">
+                                ${formatCurrency(data.balance)}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('projectionBars').innerHTML = barsHtml;
+            
+            // Show results
+            document.getElementById('results').classList.add('show');
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+    </script>
+</body>
+</html>
