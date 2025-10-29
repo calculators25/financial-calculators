@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free credit card payoff calculator - Compare minimum payments vs aggressive payoff strategies and see how much interest you can save.">
+    <title>Credit Card Payoff Calculator 2025 - Debt Elimination Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .nav {
+            background: #2d3748;
+            padding: 15px 30px;
+            text-align: center;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95em;
+        }
+        
+        .nav a:hover {
+            color: #fee140;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 1em;
+        }
+        
+        .help-text {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1.1em;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #fa709a;
+        }
+        
+        .payment-strategy {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .strategy-option {
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .strategy-option:hover {
+            border-color: #fa709a;
+            background: #fff5f7;
+        }
+        
+        .strategy-option.active {
+            border-color: #fa709a;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe8f0 100%);
+        }
+        
+        .strategy-option input[type="radio"] {
+            display: none;
+        }
+        
+        .strategy-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .strategy-desc {
+            font-size: 0.85em;
+            color: #666;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(250, 112, 154, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .results {
+            margin-top: 40px;
+            display: none;
+        }
+        
+        .results.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-stat {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .hero-stat h2 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+        
+        .hero-stat p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .comparison-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border: 3px solid #e0e0e0;
+        }
+        
+        .comparison-card.highlight {
+            border-color: #fa709a;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe8f0 100%);
+        }
+        
+        .comparison-card h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.3em;
+        }
+        
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .stat:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .stat-value {
+            font-weight: 700;
+            color: #fa709a;
+            font-size: 1.1em;
+        }
+        
+        .ad-placeholder {
+            margin: 30px 0;
+            padding: 20px;
+            background: #fff3cd;
+            border: 2px dashed #ffc107;
+            border-radius: 10px;
+            text-align: center;
+            color: #856404;
+            font-size: 0.9em;
+        }
+        
+        .tips {
+            background: #e8f4f8;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border-left: 5px solid #fa709a;
+        }
+        
+        .tips h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .tips ul {
+            padding-left: 20px;
+        }
+        
+        .tips li {
+            margin-bottom: 10px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #fa709a 0%, #fee140 100%);
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-strategy {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .nav {
+                font-size: 0.85em;
+            }
+            
+            .nav a {
+                margin: 0 8px;
+                display: inline-block;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💳 Credit Card Payoff Calculator</h1>
+            <p class="subtitle">Calculate how fast you can eliminate credit card debt</p>
+        </header>
+        
+        <div class="nav">
+            <a href="index.html">🏠 Home</a>
+            <a href="mortgage-calculator.html">Mortgage</a>
+            <a href="loan-payoff-calculator.html">Loan Payoff</a>
+            <a href="credit-card-payoff-calculator.html">Credit Card</a>
+        </div>
+        
+        <!-- AdSense Placeholder -->
+        <div class="ad-placeholder">
+            📢 Google AdSense Ad Space - Add your ad code here after approval
+        </div>
+        
+        <div class="content">
+            <form id="creditCardForm">
+                <div class="input-group">
+                    <label for="balance">Current Credit Card Balance ($)</label>
+                    <input type="number" id="balance" placeholder="5000" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="apr">APR - Annual Interest Rate (%)</label>
+                    <input type="number" id="apr" step="0.01" placeholder="18.99" required>
+                    <div class="help-text">Check your credit card statement for your APR</div>
+                </div>
+                
+                <div class="input-group">
+                    <label>Choose Your Payment Strategy</label>
+                    <div class="payment-strategy">
+                        <div class="strategy-option active" onclick="selectStrategy('minimum')">
+                            <input type="radio" name="strategy" value="minimum" id="minimum" checked>
+                            <label class="strategy-label" for="minimum">Minimum Only</label>
+                            <div class="strategy-desc">2-3% of balance</div>
+                        </div>
+                        
+                        <div class="strategy-option" onclick="selectStrategy('fixed')">
+                            <input type="radio" name="strategy" value="fixed" id="fixed">
+                            <label class="strategy-label" for="fixed">Fixed Payment</label>
+                            <div class="strategy-desc">Same amount monthly</div>
+                        </div>
+                        
+                        <div class="strategy-option" onclick="selectStrategy('aggressive')">
+                            <input type="radio" name="strategy" value="aggressive" id="aggressive">
+                            <label class="strategy-label" for="aggressive">Debt Avalanche</label>
+                            <div class="strategy-desc">Pay it off fast</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-group" id="fixedPaymentGroup" style="display: none;">
+                    <label for="fixedPayment">Monthly Payment Amount ($)</label>
+                    <input type="number" id="fixedPayment" placeholder="200">
+                </div>
+                
+                <div class="input-group" id="targetMonthsGroup" style="display: none;">
+                    <label for="targetMonths">Target Payoff Time (Months)</label>
+                    <input type="number" id="targetMonths" placeholder="12">
+                </div>
+                
+                <button type="submit" class="btn">Calculate Payoff Plan</button>
+            </form>
+            
+            <div id="results" class="results">
+                <div class="hero-stat">
+                    <h2 id="totalInterest">$0</h2>
+                    <p>Total Interest You'll Pay</p>
+                </div>
+                
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <h3 style="color: #333; margin-bottom: 10px;">Debt Freedom Progress</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBar" style="width: 0%">0%</div>
+                    </div>
+                    <p style="color: #666;"><strong id="monthsToPayoff">0</strong> months until debt-free</p>
+                </div>
+                
+                <div class="comparison">
+                    <div class="comparison-card">
+                        <h3>💸 Minimum Payments</h3>
+                        <div class="stat">
+                            <span class="stat-label">Monthly Payment</span>
+                            <span class="stat-value" id="minPayment">$0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Time to Payoff</span>
+                            <span class="stat-value" id="minTime">0 years</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Total Interest</span>
+                            <span class="stat-value" id="minInterest">$0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Total Paid</span>
+                            <span class="stat-value" id="minTotal">$0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-card highlight">
+                        <h3>⚡ Your Strategy</h3>
+                        <div class="stat">
+                            <span class="stat-label">Monthly Payment</span>
+                            <span class="stat-value" id="chosenPayment">$0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Time to Payoff</span>
+                            <span class="stat-value" id="chosenTime">0 months</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Total Interest</span>
+                            <span class="stat-value" id="chosenInterest">$0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Total Paid</span>
+                            <span class="stat-value" id="chosenTotal">$0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">💰 You Save</span>
+                            <span class="stat-value" id="savings" style="color: #28a745;">$0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AdSense Placeholder -->
+                <div class="ad-placeholder">
+                    📢 Google AdSense Ad Space - Add your ad code here after approval
+                </div>
+                
+                <div class="tips">
+                    <h3>💡 Tips to Pay Off Credit Card Debt Faster</h3>
+                    <ul>
+                        <li><strong>Stop using the card:</strong> Put it away and commit to no new charges</li>
+                        <li><strong>Pay more than minimum:</strong> Even $50 extra per month makes a huge difference</li>
+                        <li><strong>Consider balance transfer:</strong> 0% APR cards can save thousands in interest</li>
+                        <li><strong>Automate payments:</strong> Set up automatic payments so you never miss one</li>
+                        <li><strong>Snowball method:</strong> Pay minimums on all cards, extra on the smallest balance</li>
+                        <li><strong>Negotiate lower rate:</strong> Call your card company and ask for a rate reduction</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 Financial Calculators | Free credit card debt payoff tools</p>
+            <p>Disclaimer: Results are estimates. Consult a financial advisor for personalized debt management advice.</p>
+        </footer>
+    </div>
+    
+    <script>
+        function selectStrategy(strategy) {
+            document.querySelectorAll('.strategy-option').forEach(el => el.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.getElementById(strategy).checked = true;
+            
+            document.getElementById('fixedPaymentGroup').style.display = strategy === 'fixed' ? 'block' : 'none';
+            document.getElementById('targetMonthsGroup').style.display = strategy === 'aggressive' ? 'block' : 'none';
+        }
+        
+        function formatCurrency(amount) {
+            return '$' + Math.abs(amount).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+        
+        function formatTime(months) {
+            if (months < 12) return `${months} months`;
+            const years = Math.floor(months / 12);
+            const remainingMonths = months % 12;
+            if (remainingMonths === 0) return `${years} ${years === 1 ? 'year' : 'years'}`;
+            return `${years}y ${remainingMonths}m`;
+        }
+        
+        function calculatePayoff(balance, apr, monthlyPayment) {
+            const monthlyRate = (apr / 100) / 12;
+            let currentBalance = balance;
+            let totalInterest = 0;
+            let months = 0;
+            
+            while (currentBalance > 0 && months < 600) {
+                const interest = currentBalance * monthlyRate;
+                const payment = Math.min(monthlyPayment, currentBalance + interest);
+                const principal = payment - interest;
+                
+                currentBalance -= principal;
+                totalInterest += interest;
+                months++;
+                
+                if (currentBalance < 0.01) break;
+            }
+            
+            return { months, totalInterest, totalPaid: balance + totalInterest };
+        }
+        
+        document.getElementById('creditCardForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const balance = parseFloat(document.getElementById('balance').value);
+            const apr = parseFloat(document.getElementById('apr').value);
+            const strategy = document.querySelector('input[name="strategy"]:checked').value;
+            
+            // Calculate minimum payment (3% of balance or $25, whichever is greater)
+            const minPayment = Math.max(balance * 0.03, 25);
+            const minResults = calculatePayoff(balance, apr, minPayment);
+            
+            // Calculate chosen strategy
+            let chosenPayment, chosenResults;
+            
+            if (strategy === 'minimum') {
+                chosenPayment = minPayment;
+                chosenResults = minResults;
+            } else if (strategy === 'fixed') {
+                chosenPayment = parseFloat(document.getElementById('fixedPayment').value);
+                if (!chosenPayment || chosenPayment < minPayment) {
+                    alert('Payment must be at least the minimum payment of ' + formatCurrency(minPayment));
+                    return;
+                }
+                chosenResults = calculatePayoff(balance, apr, chosenPayment);
+            } else { // aggressive
+                const targetMonths = parseInt(document.getElementById('targetMonths').value);
+                if (!targetMonths || targetMonths < 1) {
+                    alert('Please enter a valid target payoff time');
+                    return;
+                }
+                // Calculate required payment for target months
+                const monthlyRate = (apr / 100) / 12;
+                chosenPayment = (balance * monthlyRate * Math.pow(1 + monthlyRate, targetMonths)) / 
+                               (Math.pow(1 + monthlyRate, targetMonths) - 1);
+                chosenResults = calculatePayoff(balance, apr, chosenPayment);
+            }
+            
+            const savings = minResults.totalInterest - chosenResults.totalInterest;
+            
+            // Display results
+            document.getElementById('totalInterest').textContent = formatCurrency(chosenResults.totalInterest);
+            document.getElementById('monthsToPayoff').textContent = chosenResults.months;
+            
+            // Progress bar (0% at start, simulating progress)
+            const progressPercent = Math.min(100, (12 / chosenResults.months) * 100);
+            document.getElementById('progressBar').style.width = progressPercent + '%';
+            document.getElementById('progressBar').textContent = Math.round(progressPercent) + '%';
+            
+            // Minimum payments
+            document.getElementById('minPayment').textContent = formatCurrency(minPayment);
+            document.getElementById('minTime').textContent = formatTime(minResults.months);
+            document.getElementById('minInterest').textContent = formatCurrency(minResults.totalInterest);
+            document.getElementById('minTotal').textContent = formatCurrency(minResults.totalPaid);
+            
+            // Chosen strategy
+            document.getElementById('chosenPayment').textContent = formatCurrency(chosenPayment);
+            document.getElementById('chosenTime').textContent = formatTime(chosenResults.months);
+            document.getElementById('chosenInterest').textContent = formatCurrency(chosenResults.totalInterest);
+            document.getElementById('chosenTotal').textContent = formatCurrency(chosenResults.totalPaid);
+            document.getElementById('savings').textContent = formatCurrency(savings);
+            
+            // Show results
+            document.getElementById('results').classList.add('show');
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+    </script>
+</body>
+</html>
