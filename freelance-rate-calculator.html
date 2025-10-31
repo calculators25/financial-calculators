@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free freelance rate calculator - Determine your hourly or project rate based on desired income, expenses, and billable hours.">
+    <title>Freelance Rate Calculator 2025 - Hourly Rate Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .nav {
+            background: #2d3748;
+            padding: 15px 30px;
+            text-align: center;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 8px;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.85em;
+            display: inline-block;
+        }
+        
+        .nav a:hover {
+            color: #43e97b;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 1em;
+        }
+        
+        .help-text {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1.1em;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #43e97b;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(67, 233, 123, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .results {
+            margin-top: 40px;
+            display: none;
+        }
+        
+        .results.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-stat {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .hero-stat h2 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+        }
+        
+        .hero-stat p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .rate-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .rate-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .rate-card h3 {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .rate-card .value {
+            color: #43e97b;
+            font-size: 2.2em;
+            font-weight: 700;
+        }
+        
+        .breakdown {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .breakdown h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .breakdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .breakdown-label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .breakdown-value {
+            font-weight: 700;
+            color: #43e97b;
+            font-size: 1.2em;
+        }
+        
+        .ad-placeholder {
+            margin: 30px 0;
+            padding: 20px;
+            background: #fff3cd;
+            border: 2px dashed #ffc107;
+            border-radius: 10px;
+            text-align: center;
+            color: #856404;
+            font-size: 0.9em;
+        }
+        
+        .tips {
+            background: #e8f5e9;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #43e97b;
+        }
+        
+        .tips h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .tips ul {
+            padding-left: 20px;
+        }
+        
+        .tips li {
+            margin-bottom: 10px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .rate-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .nav {
+                font-size: 0.75em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💼 Freelance Rate Calculator</h1>
+            <p class="subtitle">Calculate what you should charge per hour or project</p>
+        </header>
+        
+        <div class="nav">
+            <a href="index.html">🏠 Home</a>
+            <a href="mortgage-calculator.html">Mortgage</a>
+            <a href="loan-payoff-calculator.html">Loan Payoff</a>
+            <a href="credit-card-payoff-calculator.html">Credit Card</a>
+            <a href="401k-calculator.html">401(k)</a>
+            <a href="auto-loan-calculator.html">Auto Loan</a>
+            <a href="compound-interest-calculator.html">Compound Interest</a>
+            <a href="freelance-rate-calculator.html">Freelance Rate</a>
+        </div>
+        
+        <!-- AdSense Placeholder -->
+        <div class="ad-placeholder">
+            📢 Google AdSense Ad Space - Add your ad code here after approval
+        </div>
+        
+        <div class="content">
+            <form id="rateForm">
+                <div class="input-group">
+                    <label for="desiredIncome">Desired Annual Income ($)</label>
+                    <input type="number" id="desiredIncome" placeholder="80000" required>
+                    <div class="help-text">How much you want to take home per year</div>
+                </div>
+                
+                <div class="two-column">
+                    <div class="input-group">
+                        <label for="workWeeks">Working Weeks Per Year</label>
+                        <input type="number" id="workWeeks" placeholder="48" required>
+                        <div class="help-text">Typically 48-50 (allowing for vacation)</div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="billableHours">Billable Hours Per Week</label>
+                        <input type="number" id="billableHours" placeholder="30" required>
+                        <div class="help-text">Hours you can actually charge for</div>
+                    </div>
+                </div>
+                
+                <div class="two-column">
+                    <div class="input-group">
+                        <label for="expenses">Annual Business Expenses ($)</label>
+                        <input type="number" id="expenses" placeholder="15000" required>
+                        <div class="help-text">Software, equipment, insurance, etc.</div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="taxes">Tax Rate (%)</label>
+                        <input type="number" id="taxes" step="0.1" placeholder="30" required>
+                        <div class="help-text">Self-employment + income tax (typically 25-35%)</div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="profitMargin">Desired Profit Margin (%)</label>
+                    <input type="number" id="profitMargin" step="0.1" placeholder="20" required>
+                    <div class="help-text">Extra cushion for savings/growth (10-30%)</div>
+                </div>
+                
+                <button type="submit" class="btn">Calculate My Rate</button>
+            </form>
+            
+            <div id="results" class="results">
+                <div class="hero-stat">
+                    <h2 id="hourlyRate">$0</h2>
+                    <p>Recommended Hourly Rate</p>
+                </div>
+                
+                <div class="rate-cards">
+                    <div class="rate-card">
+                        <h3>Minimum Rate</h3>
+                        <div class="value" id="minRate">$0</div>
+                    </div>
+                    
+                    <div class="rate-card">
+                        <h3>Target Rate</h3>
+                        <div class="value" id="targetRate">$0</div>
+                    </div>
+                    
+                    <div class="rate-card">
+                        <h3>Premium Rate</h3>
+                        <div class="value" id="premiumRate">$0</div>
+                    </div>
+                </div>
+                
+                <div class="breakdown">
+                    <h3>Annual Revenue Breakdown</h3>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Gross Revenue Needed</span>
+                        <span class="breakdown-value" id="grossRevenue">$0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Your Take-Home Income</span>
+                        <span class="breakdown-value" id="takeHome">$0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Business Expenses</span>
+                        <span class="breakdown-value" id="expensesValue">$0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Taxes (Estimated)</span>
+                        <span class="breakdown-value" id="taxesValue">$0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Profit Margin / Buffer</span>
+                        <span class="breakdown-value" id="profitValue">$0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Total Billable Hours/Year</span>
+                        <span class="breakdown-value" id="totalHours">0</span>
+                    </div>
+                </div>
+                
+                <!-- AdSense Placeholder -->
+                <div class="ad-placeholder">
+                    📢 Google AdSense Ad Space - Add your ad code here after approval
+                </div>
+                
+                <div class="tips">
+                    <h3>💡 Pricing Tips for Freelancers</h3>
+                    <ul>
+                        <li><strong>Don't underprice:</strong> Your rate should cover ALL costs plus profit. Remember, no paid vacation or benefits!</li>
+                        <li><strong>Not all hours are billable:</strong> Account for admin work, marketing, and unpaid project time</li>
+                        <li><strong>Raise rates regularly:</strong> Increase 10-15% annually or when you gain new skills</li>
+                        <li><strong>Value-based pricing:</strong> For experienced freelancers, charge based on value delivered, not just hours</li>
+                        <li><strong>Have a minimum project rate:</strong> Small projects should have minimums (e.g., $500-1000)</li>
+                        <li><strong>Factor in payment delays:</strong> Clients may take 30-60 days to pay - plan cash flow accordingly</li>
+                        <li><strong>Premium for rush jobs:</strong> Charge 50-100% more for urgent requests</li>
+                        <li><strong>Retainer discounts:</strong> Offer 10-15% off for monthly retainers (guaranteed income!)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 Financial Calculators | Free freelance and business calculators</p>
+            <p>Disclaimer: Results are estimates. Actual rates depend on your skills, market, and experience.</p>
+        </footer>
+    </div>
+    
+    <script>
+        function formatCurrency(amount) {
+            return '$' + Math.round(amount).toLocaleString();
+        }
+        
+        document.getElementById('rateForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const desiredIncome = parseFloat(document.getElementById('desiredIncome').value);
+            const workWeeks = parseFloat(document.getElementById('workWeeks').value);
+            const billableHours = parseFloat(document.getElementById('billableHours').value);
+            const expenses = parseFloat(document.getElementById('expenses').value);
+            const taxRate = parseFloat(document.getElementById('taxes').value) / 100;
+            const profitMargin = parseFloat(document.getElementById('profitMargin').value) / 100;
+            
+            // Calculate total billable hours per year
+            const totalHoursPerYear = workWeeks * billableHours;
+            
+            // Calculate gross revenue needed
+            // Formula: (Desired Income + Expenses) / (1 - Tax Rate) / (1 - Profit Margin)
+            const beforeProfit = (desiredIncome + expenses) / (1 - taxRate);
+            const grossRevenue = beforeProfit / (1 - profitMargin);
+            
+            // Calculate hourly rate
+            const hourlyRate = grossRevenue / totalHoursPerYear;
+            
+            // Calculate rate ranges
+            const minRate = hourlyRate * 0.85; // 15% below
+            const premiumRate = hourlyRate * 1.25; // 25% above
+            
+            // Calculate breakdown
+            const profit = grossRevenue * profitMargin;
+            const afterProfit = grossRevenue - profit;
+            const taxes = afterProfit * taxRate;
+            const takeHome = desiredIncome;
+            
+            // Display results
+            document.getElementById('hourlyRate').textContent = formatCurrency(hourlyRate) + '/hr';
+            document.getElementById('minRate').textContent = formatCurrency(minRate) + '/hr';
+            document.getElementById('targetRate').textContent = formatCurrency(hourlyRate) + '/hr';
+            document.getElementById('premiumRate').textContent = formatCurrency(premiumRate) + '/hr';
+            
+            document.getElementById('grossRevenue').textContent = formatCurrency(grossRevenue);
+            document.getElementById('takeHome').textContent = formatCurrency(takeHome);
+            document.getElementById('expensesValue').textContent = formatCurrency(expenses);
+            document.getElementById('taxesValue').textContent = formatCurrency(taxes);
+            document.getElementById('profitValue').textContent = formatCurrency(profit);
+            document.getElementById('totalHours').textContent = Math.round(totalHoursPerYear) + ' hours';
+            
+            // Show results
+            document.getElementById('results').classList.add('show');
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+    </script>
+</body>
+</html>
