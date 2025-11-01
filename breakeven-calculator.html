@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free break-even calculator - Calculate how many units you need to sell to cover costs and start making profit.">
+    <title>Break-Even Calculator 2025 - Business Profitability Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .nav {
+            background: #2d3748;
+            padding: 15px 30px;
+            text-align: center;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 6px;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.75em;
+            display: inline-block;
+        }
+        
+        .nav a:hover {
+            color: #f2c94c;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #f2994a;
+        }
+        
+        .info-box h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .info-box p {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 1em;
+        }
+        
+        .help-text {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1.1em;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #f2994a;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(242, 153, 74, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .results {
+            margin-top: 40px;
+            display: none;
+        }
+        
+        .results.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-stat {
+            background: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .hero-stat h2 {
+            font-size: 3.5em;
+            margin-bottom: 5px;
+        }
+        
+        .hero-stat .sub {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .stat-card h3 {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .stat-card .value {
+            color: #f2994a;
+            font-size: 2em;
+            font-weight: 700;
+        }
+        
+        .breakdown {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .breakdown h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .breakdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .breakdown-label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .breakdown-value {
+            font-weight: 700;
+            color: #f2994a;
+            font-size: 1.2em;
+        }
+        
+        .chart {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .chart h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .chart-row {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+        
+        .chart-label {
+            width: 100px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .chart-bar {
+            flex: 1;
+            height: 40px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .chart-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f2994a 0%, #f2c94c 100%);
+            display: flex;
+            align-items: center;
+            padding-left: 15px;
+            color: white;
+            font-weight: 600;
+            transition: width 1s ease;
+        }
+        
+        .ad-placeholder {
+            margin: 30px 0;
+            padding: 20px;
+            background: #fff3cd;
+            border: 2px dashed #ffc107;
+            border-radius: 10px;
+            text-align: center;
+            color: #856404;
+            font-size: 0.9em;
+        }
+        
+        .tips {
+            background: #fff8e1;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #f2994a;
+        }
+        
+        .tips h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .tips ul {
+            padding-left: 20px;
+        }
+        
+        .tips li {
+            margin-bottom: 10px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .nav {
+                font-size: 0.65em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Break-Even Calculator</h1>
+            <p class="subtitle">Find out when your business becomes profitable</p>
+        </header>
+        
+        <div class="nav">
+            <a href="index.html">🏠 Home</a>
+            <a href="mortgage-calculator.html">Mortgage</a>
+            <a href="loan-payoff-calculator.html">Loan Payoff</a>
+            <a href="credit-card-payoff-calculator.html">Credit Card</a>
+            <a href="401k-calculator.html">401(k)</a>
+            <a href="auto-loan-calculator.html">Auto Loan</a>
+            <a href="compound-interest-calculator.html">Compound Interest</a>
+            <a href="freelance-rate-calculator.html">Freelance Rate</a>
+            <a href="budget-calculator.html">Budget</a>
+            <a href="student-loan-calculator.html">Student Loan</a>
+            <a href="breakeven-calculator.html">Break-Even</a>
+        </div>
+        
+        <!-- AdSense Placeholder -->
+        <div class="ad-placeholder">
+            📢 Google AdSense Ad Space - Add your ad code here after approval
+        </div>
+        
+        <div class="content">
+            <div class="info-box">
+                <h3>📈 What is Break-Even Analysis?</h3>
+                <p>Break-even is the point where your total revenue equals total costs - you're not losing money, but not making profit yet. Knowing your break-even point helps you set sales targets and price products correctly.</p>
+            </div>
+            
+            <form id="breakevenForm">
+                <div class="two-column">
+                    <div class="input-group">
+                        <label for="fixedCosts">Fixed Costs (Monthly) ($)</label>
+                        <input type="number" id="fixedCosts" placeholder="5000" required>
+                        <div class="help-text">Rent, salaries, insurance, utilities</div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="variableCost">Variable Cost Per Unit ($)</label>
+                        <input type="number" id="variableCost" step="0.01" placeholder="15" required>
+                        <div class="help-text">Materials, labor per item</div>
+                    </div>
+                </div>
+                
+                <div class="two-column">
+                    <div class="input-group">
+                        <label for="sellingPrice">Selling Price Per Unit ($)</label>
+                        <input type="number" id="sellingPrice" step="0.01" placeholder="50" required>
+                        <div class="help-text">How much you charge customers</div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="currentSales">Current Monthly Sales (Units)</label>
+                        <input type="number" id="currentSales" placeholder="200">
+                        <div class="help-text">Optional: See if you're profitable</div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn">Calculate Break-Even Point</button>
+            </form>
+            
+            <div id="results" class="results">
+                <div class="hero-stat">
+                    <h2 id="breakevenUnits">0</h2>
+                    <p class="sub">Units to Break Even</p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Break-Even Revenue</h3>
+                        <div class="value" id="breakevenRevenue">$0</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Contribution Margin</h3>
+                        <div class="value" id="contributionMargin">$0</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Margin %</h3>
+                        <div class="value" id="marginPercent">0%</div>
+                    </div>
+                </div>
+                
+                <div class="breakdown">
+                    <h3>Cost & Revenue Breakdown</h3>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Fixed Costs (Monthly)</span>
+                        <span class="breakdown-value" id="fixedValue">$0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Variable Cost Per Unit</span>
+                        <span class="breakdown-value" id="variableValue">$0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Selling Price Per Unit</span>
+                        <span class="breakdown-value" id="priceValue">$0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Profit Per Unit (After Break-Even)</span>
+                        <span class="breakdown-value" id="profitPerUnit">$0</span>
+                    </div>
+                </div>
+                
+                <div id="currentStatus" style="display: none;">
+                    <div class="chart">
+                        <h3>Your Current Status</h3>
+                        <div style="margin-bottom: 20px;">
+                            <div style="text-align: center; margin-bottom: 15px;">
+                                <span style="font-size: 2em; font-weight: 700;" id="statusText">Loading...</span>
+                            </div>
+                            <p style="text-align: center; color: #666;" id="statusDetail"></p>
+                        </div>
+                        
+                        <div class="chart-row">
+                            <div class="chart-label">Current Sales</div>
+                            <div class="chart-bar">
+                                <div class="chart-fill" id="salesBar" style="width: 0%">
+                                    <span id="salesBarText">0 units</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-row">
+                            <div class="chart-label">Break-Even</div>
+                            <div class="chart-bar">
+                                <div class="chart-fill" style="width: 100%; background: #28a745;">
+                                    <span id="breakevenBarText">0 units</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AdSense Placeholder -->
+                <div class="ad-placeholder">
+                    📢 Google AdSense Ad Space - Add your ad code here after approval
+                </div>
+                
+                <div class="tips">
+                    <h3>💡 How to Use Break-Even Analysis</h3>
+                    <ul>
+                        <li><strong>Set realistic goals:</strong> Know exactly how many sales you need to cover costs each month</li>
+                        <li><strong>Price your products:</strong> If break-even is too high, either raise prices or lower costs</li>
+                        <li><strong>Reduce fixed costs:</strong> Negotiate rent, switch to cheaper software, optimize overhead</li>
+                        <li><strong>Improve margins:</strong> Find cheaper suppliers or more efficient production methods</li>
+                        <li><strong>Plan for growth:</strong> Calculate how much profit you make for every unit sold beyond break-even</li>
+                        <li><strong>Make better decisions:</strong> Should you launch a new product? Hire more staff? This analysis helps!</li>
+                        <li><strong>Track monthly:</strong> Your break-even point changes as costs fluctuate - recalculate regularly</li>
+                        <li><strong>Consider seasonality:</strong> Some months may need higher sales to hit break-even</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 Financial Calculators | Free business and profitability calculators</p>
+            <p>Disclaimer: Results are estimates. Consult an accountant for detailed business financial analysis.</p>
+        </footer>
+    </div>
+    
+    <script>
+        function formatCurrency(amount) {
+            return '$' + Math.round(amount).toLocaleString();
+        }
+        
+        document.getElementById('breakevenForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const fixedCosts = parseFloat(document.getElementById('fixedCosts').value);
+            const variableCost = parseFloat(document.getElementById('variableCost').value);
+            const sellingPrice = parseFloat(document.getElementById('sellingPrice').value);
+            const currentSales = parseFloat(document.getElementById('currentSales').value) || 0;
+            
+            // Calculate contribution margin (price - variable cost)
+            const contributionMargin = sellingPrice - variableCost;
+            
+            if (contributionMargin <= 0) {
+                alert('Selling price must be higher than variable cost to make profit!');
+                return;
+            }
+            
+            // Calculate break-even point (Fixed Costs / Contribution Margin)
+            const breakevenUnits = Math.ceil(fixedCosts / contributionMargin);
+            const breakevenRevenue = breakevenUnits * sellingPrice;
+            const marginPercent = (contributionMargin / sellingPrice) * 100;
+            
+            // Display results
+            document.getElementById('breakevenUnits').textContent = breakevenUnits.toLocaleString();
+            document.getElementById('breakevenRevenue').textContent = formatCurrency(breakevenRevenue);
+            document.getElementById('contributionMargin').textContent = formatCurrency(contributionMargin);
+            document.getElementById('marginPercent').textContent = marginPercent.toFixed(1) + '%';
+            
+            document.getElementById('fixedValue').textContent = formatCurrency(fixedCosts);
+            document.getElementById('variableValue').textContent = formatCurrency(variableCost);
+            document.getElementById('priceValue').textContent = formatCurrency(sellingPrice);
+            document.getElementById('profitPerUnit').textContent = formatCurrency(contributionMargin);
+            
+            // Current status if provided
+            if (currentSales > 0) {
+                document.getElementById('currentStatus').style.display = 'block';
+                
+                const currentRevenue = currentSales * sellingPrice;
+                const currentVariableCosts = currentSales * variableCost;
+                const currentTotalCosts = fixedCosts + currentVariableCosts;
+                const currentProfit = currentRevenue - currentTotalCosts;
+                
+                const percentOfBreakeven = (currentSales / breakevenUnits) * 100;
+                
+                document.getElementById('salesBar').style.width = Math.min(percentOfBreakeven, 100) + '%';
+                document.getElementById('salesBarText').textContent = currentSales.toLocaleString() + ' units';
+                document.getElementById('breakevenBarText').textContent = breakevenUnits.toLocaleString() + ' units';
+                
+                if (currentSales >= breakevenUnits) {
+                    document.getElementById('statusText').textContent = '✅ Profitable!';
+                    document.getElementById('statusText').style.color = '#28a745';
+                    document.getElementById('statusDetail').textContent = 
+                        `You're selling ${(currentSales - breakevenUnits).toLocaleString()} units above break-even. ` +
+                        `Current monthly profit: ${formatCurrency(currentProfit)}`;
+                } else {
+                    document.getElementById('statusText').textContent = '⚠️ Not Yet Profitable';
+                    document.getElementById('statusText').style.color = '#dc3545';
+                    const unitsNeeded = breakevenUnits - currentSales;
+                    document.getElementById('statusDetail').textContent = 
+                        `You need to sell ${unitsNeeded.toLocaleString()} more units per month to break even. ` +
+                        `Current monthly loss: ${formatCurrency(Math.abs(currentProfit))}`;
+                }
+            } else {
+                document.getElementById('currentStatus').style.display = 'none';
+            }
+            
+            // Show results
+            document.getElementById('results').classList.add('show');
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+    </script>
+</body>
+</html>
