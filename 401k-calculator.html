@@ -17,16 +17,18 @@
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             min-height: 100vh;
             padding: 20px;
+            margin: 0;
         }
         
-      .container {
-    max-width: 1200px;  /* Change from 800px or 900px to 1200px */
-    margin: 0 auto;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    overflow: hidden;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
         header {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: white;
@@ -317,6 +319,16 @@
             font-size: 0.9em;
         }
         
+        footer a {
+            color: #4facfe;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.8em;
@@ -477,8 +489,14 @@
         </div>
         
         <footer>
-            <p>© 2025 Financial Calculators | Free 401(k) and retirement planning tools</p>
-            <p>Disclaimer: Projections are estimates based on assumptions. Past performance doesn't guarantee future results. Consult a financial advisor.</p>
+            <p><strong>© 2025 Financial Calculators</strong></p>
+            <p>Free financial planning tools and calculators for better money management</p>
+            <p style="margin-top: 15px;">
+                <a href="index.html">Home</a> | 
+                <a href="privacy-policy.html">Privacy Policy</a> | 
+                <a href="contact.html">Contact</a>
+            </p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Disclaimer: Projections are estimates based on assumptions. Past performance doesn't guarantee future results. Consult a financial advisor.</p>
         </footer>
     </div>
     
@@ -597,22 +615,4 @@
         });
     </script>
 </body>
-    body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    min-height: 100vh;
-    padding: 20px;
-    margin: 0;  /* Add this */
-}
 </html>
-
-<footer>
-    <p><strong>© 2025 Financial Calculators</strong></p>
-    <p>Free financial planning tools and calculators for better money management</p>
-    <p style="margin-top: 15px;">
-        <a href="index.html" style="color: #667eea; text-decoration: none; margin: 0 10px;">Home</a> | 
-        <a href="privacy-policy.html" style="color: #667eea; text-decoration: none; margin: 0 10px;">Privacy Policy</a> | 
-        <a href="contact.html" style="color: #667eea; text-decoration: none; margin: 0 10px;">Contact</a>
-    </p>
-    <p style="margin-top: 10px; font-size: 0.9em;">Disclaimer: Results are estimates. Consult a financial advisor for personalized advice.</p>
-</footer>
