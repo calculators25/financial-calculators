@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJBE4CJLJK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QJBE4CJLJK');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free savings goal calculator - Calculate how much to save monthly to reach your financial goals on time.">
+    <title>Savings Goal Calculator 2025 - Plan Your Financial Goals</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .nav {
+            background: #2d3748;
+            padding: 15px 30px;
+            text-align: center;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 6px;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.75em;
+            display: inline-block;
+        }
+        
+        .nav a:hover {
+            color: #43e97b;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #43e97b;
+        }
+        
+        .info-box h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .info-box p {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 1em;
+        }
+        
+        .help-text {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1.1em;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #43e97b;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(67, 233, 123, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .results {
+            margin-top: 40px;
+            display: none;
+        }
+        
+        .results.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-stat {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .hero-stat h2 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+        }
+        
+        .hero-stat p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .stat-card h3 {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .stat-card .value {
+            color: #43e97b;
+            font-size: 2.2em;
+            font-weight: 700;
+        }
+        
+        .progress-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .progress-section h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .progress-bar-container {
+            width: 100%;
+            height: 50px;
+            background: #e0e0e0;
+            border-radius: 25px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2em;
+            transition: width 1s ease;
+        }
+        
+        .milestone {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+        
+        .milestone-icon {
+            width: 40px;
+            height: 40px;
+            background: #43e97b;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 15px;
+        }
+        
+        .milestone-text {
+            flex: 1;
+        }
+        
+        .milestone-label {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .milestone-value {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .ad-placeholder {
+            margin: 30px 0;
+            padding: 20px;
+            background: #fff3cd;
+            border: 2px dashed #ffc107;
+            border-radius: 10px;
+            text-align: center;
+            color: #856404;
+            font-size: 0.9em;
+        }
+        
+        .tips {
+            background: #e8f5e9;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #43e97b;
+        }
+        
+        .tips h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .tips ul {
+            padding-left: 20px;
+        }
+        
+        .tips li {
+            margin-bottom: 10px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        footer a {
+            color: #43e97b;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .nav {
+                font-size: 0.65em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Savings Goal Calculator</h1>
+            <p class="subtitle">Plan how much to save to reach your financial goals</p>
+        </header>
+        
+        <div class="nav">
+            <a href="index.html">🏠 Home</a>
+            <a href="mortgage-calculator.html">Mortgage</a>
+            <a href="401k-calculator.html">401(k)</a>
+            <a href="savings-goal-calculator.html">Savings Goal</a>
+            <a href="budget-calculator.html">Budget</a>
+        </div>
+        
+        <!-- AdSense Placeholder -->
+        <div class="ad-placeholder">
+            📢 Google AdSense Ad Space - Add your ad code here after approval
+        </div>
+        
+        <div class="content">
+            <div class="info-box">
+                <h3>💡 How This Calculator Works</h3>
+                <p>Tell us your savings goal, how much you already have, and when you want to reach it. We'll calculate exactly how much you need to save each month, taking compound interest into account.</p>
+            </div>
+            
+            <form id="savingsForm">
+                <div class="input-group">
+                    <label for="goalAmount">Savings Goal Amount ($)</label>
+                    <input type="number" id="goalAmount" placeholder="50000" required>
+                    <div class="help-text">How much money do you want to save?</div>
+                </div>
+                
+                <div class="two-column">
+                    <div class="input-group">
+                        <label for="currentSavings">Current Savings ($)</label>
+                        <input type="number" id="currentSavings" placeholder="5000" required>
+                        <div class="help-text">How much do you already have?</div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="timeframe">Time to Reach Goal (Years)</label>
+                        <input type="number" id="timeframe" step="0.5" placeholder="5" required>
+                    </div>
+                </div>
+                
+                <div class="two-column">
+                    <div class="input-group">
+                        <label for="interestRate">Expected Interest Rate (%)</label>
+                        <input type="number" id="interestRate" step="0.1" placeholder="4" required>
+                        <div class="help-text">Savings account: 1-5%, Investments: 7-10%</div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="goalType">What are you saving for?</label>
+                        <select id="goalType">
+                            <option value="emergency">Emergency Fund</option>
+                            <option value="house">House Down Payment</option>
+                            <option value="car">Car Purchase</option>
+                            <option value="vacation">Vacation</option>
+                            <option value="wedding">Wedding</option>
+                            <option value="education">Education</option>
+                            <option value="retirement">Retirement</option>
+                            <option value="other">Other Goal</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn">Calculate Savings Plan</button>
+            </form>
+            
+            <div id="results" class="results">
+                <div class="hero-stat">
+                    <h2 id="monthlySavings">$0</h2>
+                    <p>You need to save this much per month</p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Goal</h3>
+                        <div class="value" id="totalGoal">$0</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Still Need</h3>
+                        <div class="value" id="stillNeed">$0</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Total Contributions</h3>
+                        <div class="value" id="totalContributions">$0</div>
+                    </div>
+                </div>
+                
+                <div class="progress-section">
+                    <h3>Your Progress to Goal</h3>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="progressBar" style="width: 0%">
+                            <span id="progressText">0%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="milestone">
+                        <div class="milestone-icon">✓</div>
+                        <div class="milestone-text">
+                            <div class="milestone-label">Starting Point</div>
+                            <div class="milestone-value" id="startingAmount">$0 today</div>
+                        </div>
+                    </div>
+                    
+                    <div class="milestone">
+                        <div class="milestone-icon">📅</div>
+                        <div class="milestone-text">
+                            <div class="milestone-label">1 Year Milestone</div>
+                            <div class="milestone-value" id="oneYearMilestone">$0 saved</div>
+                        </div>
+                    </div>
+                    
+                    <div class="milestone">
+                        <div class="milestone-icon">🎯</div>
+                        <div class="milestone-text">
+                            <div class="milestone-label">Goal Reached</div>
+                            <div class="milestone-value" id="goalDate">In X years</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AdSense Placeholder -->
+                <div class="ad-placeholder">
+                    📢 Google AdSense Ad Space - Add your ad code here after approval
+                </div>
+                
+                <div class="tips">
+                    <h3>💡 Tips to Reach Your Savings Goal Faster</h3>
+                    <ul>
+                        <li><strong>Automate it:</strong> Set up automatic transfers on payday - you won't miss what you don't see</li>
+                        <li><strong>Start today:</strong> Even $20/month is better than waiting. The sooner you start, the easier it gets</li>
+                        <li><strong>Round up purchases:</strong> Apps like Acorns round up purchases to the nearest dollar and invest the change</li>
+                        <li><strong>Increase with raises:</strong> Got a raise? Boost your savings rate before lifestyle inflation kicks in</li>
+                        <li><strong>Use windfalls wisely:</strong> Tax refunds, bonuses, gifts - put 50%+ toward your goal</li>
+                        <li><strong>Cut one expense:</strong> Cancel unused subscriptions or eat out less - redirect that money to savings</li>
+                        <li><strong>Side hustle:</strong> Freelance, sell items, gig economy - extra income accelerates progress dramatically</li>
+                        <li><strong>High-yield savings:</strong> Earning 4-5% vs 0.01% makes a huge difference over time</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>© 2025 Financial Calculators</strong></p>
+            <p>Free financial planning tools and calculators for better money management</p>
+            <p style="margin-top: 15px;">
+                <a href="index.html">Home</a> | 
+                <a href="privacy-policy.html">Privacy Policy</a> | 
+                <a href="contact.html">Contact</a>
+            </p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Disclaimer: Results are estimates. Actual returns vary based on market conditions.</p>
+        </footer>
+    </div>
+    
+    <script>
+        function formatCurrency(amount) {
+            return '$' + Math.round(amount).toLocaleString();
+        }
+        
+        document.getElementById('savingsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const goalAmount = parseFloat(document.getElementById('goalAmount').value);
+            const currentSavings = parseFloat(document.getElementById('currentSavings').value);
+            const timeframe = parseFloat(document.getElementById('timeframe').value);
+            const interestRate = parseFloat(document.getElementById('interestRate').value) / 100;
+            const goalType = document.getElementById('goalType').value;
+            
+            const stillNeed = goalAmount - currentSavings;
+            
+            if (stillNeed <= 0) {
+                alert('Congratulations! You already have enough saved for your goal!');
+                return;
+            }
+            
+            // Calculate monthly savings needed with compound interest
+            // Future Value = Current Savings * (1+r)^n + Monthly Payment * [((1+r)^n - 1) / r]
+            // Solving for Monthly Payment
+            const months = timeframe * 12;
+            const monthlyRate = interestRate / 12;
+            
+            const futureValueOfCurrent = currentSavings * Math.pow(1 + monthlyRate, months);
+            const stillNeedAfterGrowth = goalAmount - futureValueOfCurrent;
+            
+            let monthlySavings;
+            if (monthlyRate === 0) {
+                monthlySavings = stillNeedAfterGrowth / months;
+            } else {
+                monthlySavings = stillNeedAfterGrowth / (((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate));
+            }
+            
+            const totalContributions = monthlySavings * months;
+            
+            // Calculate 1-year milestone
+            const oneYearMonths = Math.min(12, months);
+            const oneYearBalance = currentSavings * Math.pow(1 + monthlyRate, oneYearMonths) + 
+                                   monthlySavings * (((Math.pow(1 + monthlyRate, oneYearMonths) - 1) / monthlyRate));
+            
+            // Display results
+            document.getElementById('monthlySavings').textContent = formatCurrency(monthlySavings);
+            document.getElementById('totalGoal').textContent = formatCurrency(goalAmount);
+            document.getElementById('stillNeed').textContent = formatCurrency(stillNeed);
+            document.getElementById('totalContributions').textContent = formatCurrency(totalContributions);
+            
+            // Progress bar
+            const progressPercent = (currentSavings / goalAmount) * 100;
+            document.getElementById('progressBar').style.width = progressPercent + '%';
+            document.getElementById('progressText').textContent = Math.round(progressPercent) + '%';
+            
+            // Milestones
+            document.getElementById('startingAmount').textContent = formatCurrency(currentSavings) + ' today';
+            document.getElementById('oneYearMilestone').textContent = formatCurrency(oneYearBalance) + ' after 1 year';
+            document.getElementById('goalDate').textContent = `${formatCurrency(goalAmount)} in ${timeframe} years`;
+            
+            // Show results
+            document.getElementById('results').classList.add('show');
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+    </script>
+</body>
+</html>
