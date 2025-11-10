@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Retirement Income Calculator — estimate how long your retirement savings will last given withdrawals, expected returns, and pension." />
+  <title>Retirement Income Calculator — Financial Calculators</title>
+
+  <!-- Google Analytics (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJBE4CJLJK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-QJBE4CJLJK');
+  </script>
+
+  <!-- Google AdSense: Replace ca-pub-XXXXXXXX with your publisher ID -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-REPLACE_WITH_YOUR_PUBID" crossorigin="anonymous"></script>
+
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Ubuntu,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:20px}
+    .container{max-width:900px;margin:0 auto;background:#fff;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden}
+    header{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:36px;text-align:center}
+    h1{font-size:2rem;margin-bottom:6px}
+    .subtitle{opacity:.95}
+    nav.nav{display:flex;gap:12px;justify-content:center;padding:12px;background:#fff}
+    nav.nav a{padding:8px 12px;border-radius:8px;text-decoration:none;color:#333;background:linear-gradient(135deg,#f7f7f8,#fff);border:1px solid #eee}
+    .content{padding:24px}
+    .row{display:flex;gap:16px}
+    .col{flex:1}
+    .input-group{margin-bottom:14px}
+    label{display:block;font-weight:600;margin-bottom:8px;color:#333}
+    input,select,button{width:100%;padding:12px;border:2px solid #e7e7e7;border-radius:10px;font-size:1rem}
+    input:focus,select:focus{outline:none;border-color:#667eea}
+    .btn{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;border:none;padding:12px 16px;font-weight:700;cursor:pointer;border-radius:10px}
+    .results{margin-top:20px;padding:18px;background:#f8f9fa;border-radius:12px;display:none}
+    .results.show{display:block}
+    .result-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee}
+    .ad-block{margin:18px 0;text-align:center}
+    table{width:100%;border-collapse:collapse;margin-top:12px}
+    th{background:#667eea;color:#fff;padding:10px;text-align:left}
+    td{padding:10px;border-bottom:1px solid #eee}
+    footer{padding:18px;text-align:center;background:#f8f9fa;color:#666}
+    @media(max-width:720px){.row{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🧾 Retirement Income Calculator</h1>
+      <p class="subtitle">Estimate how long your savings will last given expected returns and yearly withdrawals.</p>
+    </header>
+
+    <nav class="nav">
+      <a href="index.html">🏠 Home</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="ad-block">
+      <!-- AdSense responsive unit -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-REPLACE_WITH_YOUR_PUBID"
+           data-ad-slot="REPLACE_WITH_AD_SLOT"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div class="content">
+      <form id="retireForm">
+        <div class="row">
+          <div class="col input-group">
+            <label for="currentBalance">Current Retirement Savings ($)</label>
+            <input id="currentBalance" type="number" step="0.01" placeholder="200000" required />
+          </div>
+
+          <div class="col input-group">
+            <label for="annualReturn">Expected Annual Return (%)</label>
+            <input id="annualReturn" type="number" step="0.01" placeholder="5" required />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col input-group">
+            <label for="annualWithdrawal">Planned Annual Withdrawal ($)</label>
+            <input id="annualWithdrawal" type="number" step="0.01" placeholder="30000" required />
+          </div>
+
+          <div class="col input-group">
+            <label for="pensionIncome">Annual Pension / Social Security (optional)</label>
+            <input id="pensionIncome" type="number" step="0.01" placeholder="10000" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col input-group">
+            <label for="maxYears">Maximum Years to Simulate</label>
+            <input id="maxYears" type="number" step="1" placeholder="100" value="100" />
+          </div>
+
+          <div class="col input-group" style="align-self:end">
+            <button class="btn" id="calcBtn" type="submit">Calculate</button>
+          </div>
+        </div>
+      </form>
+
+      <div id="results" class="results" aria-live="polite">
+        <div class="result-item"><strong>Estimated Years Before Depletion</strong><span id="yearsResult">—</span></div>
+        <div class="result-item"><strong>Years (rounded)</strong><span id="yearsRounded">—</span></div>
+        <div style="margin-top:12px">
+          <h3>Year-by-year projection</h3>
+          <table>
+            <thead>
+              <tr><th>Year</th><th>Start Balance</th><th>Interest</th><th>Pension</th><th>Withdrawal</th><th>End Balance</th></tr>
+            </thead>
+            <tbody id="projBody"></tbody>
+          </table>
+        </div>
+
+        <div class="ad-block">
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-REPLACE_WITH_YOUR_PUBID"
+               data-ad-slot="REPLACE_WITH_AD_SLOT_2"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2025 Financial Calculators — Retirement Income Calculator</p>
+      <p class="small">Replace <code>ca-pub-REPLACE_WITH_YOUR_PUBID</code> and ad slot IDs with your AdSense values.</p>
+    </footer>
+  </div>
+
+  <script>
+    function fmt(v){return '$' + Number(v).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}
+
+    document.getElementById('retireForm').addEventListener('submit', function(e){
+      e.preventDefault();
+
+      const startBalance = parseFloat(document.getElementById('currentBalance').value) || 0;
+      const annualReturn = parseFloat(document.getElementById('annualReturn').value) / 100 || 0;
+      const withdrawal = parseFloat(document.getElementById('annualWithdrawal').value) || 0;
+      const pension = parseFloat(document.getElementById('pensionIncome').value) || 0;
+      const maxYears = parseInt(document.getElementById('maxYears').value) || 100;
+
+      if(startBalance <= 0){ alert('Enter a positive starting balance.'); return; }
+      if(withdrawal <= 0){ alert('Enter a positive annual withdrawal.'); return; }
+
+      const projBody = document.getElementById('projBody'); projBody.innerHTML = '';
+
+      let balance = startBalance;
+      let years = 0;
+      let depleted = false;
+
+      for(let y=1;y<=maxYears;y++){
+        const start = balance;
+        const interest = start * annualReturn; // interest during year
+        const startAfterInterest = start + interest;
+        const netWithdrawal = withdrawal - pension; // if pension >= withdrawal, netWithdrawal <=0 (balance grows)
+        const end = startAfterInterest - netWithdrawal;
+
+        // append row
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${y}</td><td>${fmt(start)}</td><td>${fmt(interest)}</td><td>${fmt(pension)}</td><td>${fmt(withdrawal)}</td><td>${fmt(Math.max(end,0))}</td>`;
+        projBody.appendChild(tr);
+
+        years = y;
+
+        if(end <= 0){
+          // compute fractional year used: fraction = startAfterInterest / netWithdrawal
+          let fraction = 0;
+          if(netWithdrawal > 0){ fraction = startAfterInterest / netWithdrawal; }
+          else { fraction = maxYears - (y-1); } // if netWithdrawal <=0, never depletes
+
+          const totalYears = (y-1) + Math.min(1, fraction);
+          document.getElementById('yearsResult').textContent = totalYears.toFixed(2) + ' years';
+          document.getElementById('yearsRounded').textContent = Math.floor(totalYears) + ' years';
+          depleted = true;
+          break;
+        }
+
+        balance = end;
+      }
+
+      if(!depleted){
+        document.getElementById('yearsResult').textContent = 'Not depleted within ' + maxYears + ' years';
+        document.getElementById('yearsRounded').textContent = 'Not depleted';
+      }
+
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({behavior:'smooth'});
+    });
+  </script>
+</body>
+</html>
